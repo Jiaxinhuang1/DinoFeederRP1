@@ -18,7 +18,7 @@ public class TileBehaviour : MonoBehaviour
         while(true){
             yield return new WaitForSeconds(1f);
             if(Random.Range(0, 100) < objectSpawnRate && gM.currentFossil == null){
-                GameObject newObjectSpawnedWithin = Instantiate(spawnedObject, transform);
+                GameObject newObjectSpawnedWithin = Instantiate(spawnedObject, transform.position, Quaternion.identity, transform);
                 contains = newObjectSpawnedWithin;
                 gM.currentFossil = newObjectSpawnedWithin;
             }
