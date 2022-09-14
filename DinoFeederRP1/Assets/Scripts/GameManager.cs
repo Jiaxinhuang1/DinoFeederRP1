@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
+    CompositeCollider2D boundingBox;
+
     public enum State{ live, dead }
     public enum ItemType{ wateringCan, seed, bone }
     public static GameManager instance;
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
     public int mapSizeX, mapSizeY;
     public float tileSize;
     public GameObject tile;
-    CompositeCollider2D boundingBox;
+    public GameObject currentFossil;
 
     void Awake(){
         if (instance != null && instance != this)
