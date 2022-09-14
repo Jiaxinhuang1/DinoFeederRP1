@@ -57,6 +57,6 @@ public class DinoUIController : MonoBehaviour
 
     public void ChangeTileScene()
     {
-        SceneManager.LoadScene("TileTesting");
+        SceneManager.LoadScene("SampleScene");
     }
 }
