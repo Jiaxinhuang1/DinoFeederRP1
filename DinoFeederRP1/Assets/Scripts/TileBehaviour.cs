@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TileBehaviour : MonoBehaviour
 {
+    UIManager uM;
     GameManager gM;
     MeshRenderer meshRenderer;
     public GameObject contains;
@@ -22,7 +23,15 @@ public class TileBehaviour : MonoBehaviour
                 contains = newObjectSpawnedWithin;
                 gM.currentFossil = newObjectSpawnedWithin;
             }
-            print("updating");
+            /*
+            switch(currentState){
+                case GameManager.State.dead:
+                break;
+                case GameManager.State.live:
+                uM.aliveCount++;
+                break;
+            }
+            */
         }
     }
 
@@ -30,6 +39,7 @@ public class TileBehaviour : MonoBehaviour
     void Start()
     {
         gM = GameManager.instance;
+        uM = UIManager.instance;
         meshRenderer = gameObject.GetComponent<MeshRenderer>();
         StartCoroutine(TileUpdate());
     }

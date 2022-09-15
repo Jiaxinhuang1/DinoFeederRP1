@@ -6,6 +6,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     Vector3 mousePos;
     GameManager gM;
+    UIManager uM;
     LineRenderer lineRenderer;
     Rigidbody2D rb;
     public float moveSpeed;
@@ -19,6 +20,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         gM = GameManager.instance;
+        uM = UIManager.instance;
         rb = GetComponent<Rigidbody2D>();
         lineRenderer = GetComponent<LineRenderer>();
     }
@@ -55,23 +57,25 @@ public class PlayerBehaviour : MonoBehaviour
             lineRenderer.endColor = Color.red;
             if(Vector3.Distance(transform.position, hit.transform.position) < reach){
                 lineRenderer.endColor = Color.green;
-                if(Input.GetButtonDown("Interact")){
+                if(Input.GetButton("Grab")){
                     if(hit.transform.GetComponent<ItemBehaviour>() != null){
                         if(contains != hit.transform.gameObject.GetComponent<ItemBehaviour>()){
                             if(contains != null){
                                 contains.transform.parent = this.transform.parent;
+                                contains.transform.position = hit.transform.position;
                             }
                             contains = hit.transform.gameObject.GetComponent<ItemBehaviour>();
                             hit.transform.parent = this.transform;
                             hit.transform.localPosition = Vector3.zero;
                         }
-                        else{ 
-                            contains.transform.parent = this.transform.parent;
-                            contains = null;
-                        }
                     }
-                    else if(hit.transform.GetComponent<TileBehaviour>() != null && contains != null && contains.type == GameManager.ItemType.wateringCan){    
+                }
+                if(Input.GetButtonDown("Interact")){
+                    if(hit.transform.GetComponent<TileBehaviour>() != null && contains != null && contains.type == GameManager.ItemType.wateringCan){    
                         print("name: " + hit.collider.name + ", distance: " + ", " + transform.position + ", " + hit.transform.position + ", " + Vector3.Distance(transform.position, hit.transform.position) + ", reach: " + reach);
+                        if(hit.transform.gameObject.GetComponent<TileBehaviour>().currentState == GameManager.State.dead){
+                            uM.aliveCount++;
+                        }
                         hit.transform.gameObject.GetComponent<TileBehaviour>().currentState = GameManager.State.live;
                     }
                 } 
