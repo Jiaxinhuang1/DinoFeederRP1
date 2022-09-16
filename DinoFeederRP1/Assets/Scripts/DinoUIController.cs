@@ -47,7 +47,7 @@ public class DinoUIController : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("StartScreen");
     }
 
     public void QuitGame()
