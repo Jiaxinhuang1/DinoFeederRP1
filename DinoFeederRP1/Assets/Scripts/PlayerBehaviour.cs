@@ -90,6 +90,7 @@ public class PlayerBehaviour : MonoBehaviour
                         }
                         hit.transform.gameObject.GetComponent<TileBehaviour>().currentState = GameManager.State.live;
                         aM.waterSound.Play();
+                        Instantiate(Resources.Load("Water"), hit.transform);
                     }
                 } 
             }    

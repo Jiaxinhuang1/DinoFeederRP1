@@ -38,6 +38,7 @@ public class InteractiveItem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G) && (isInside && !isGrabbed))
         {
             Debug.Log("Grow");
+            Instantiate(Resources.Load("Grow"), this.gameObject.transform);
         }
     }
 
