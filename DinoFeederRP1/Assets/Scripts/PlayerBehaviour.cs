@@ -57,6 +57,7 @@ public class PlayerBehaviour : MonoBehaviour
             lineRenderer.endColor = Color.red;
             if(Vector3.Distance(transform.position, hit.transform.position) < reach){
                 lineRenderer.endColor = Color.green;
+                /*
                 if(Input.GetButton("Grab")){
                     if(hit.transform.GetComponent<ItemBehaviour>() != null){
                         if(contains != hit.transform.gameObject.GetComponent<ItemBehaviour>()){
@@ -70,6 +71,7 @@ public class PlayerBehaviour : MonoBehaviour
                         }
                     }
                 }
+                */
                 if(Input.GetButtonDown("Interact")){
                     if(hit.transform.GetComponent<TileBehaviour>() != null && contains != null && contains.type == GameManager.ItemType.wateringCan){    
                         print("name: " + hit.collider.name + ", distance: " + ", " + transform.position + ", " + hit.transform.position + ", " + Vector3.Distance(transform.position, hit.transform.position) + ", reach: " + reach);
