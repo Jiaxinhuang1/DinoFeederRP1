@@ -5,6 +5,7 @@ using TMPro;
 
 public class InteractiveItem : MonoBehaviour
 {
+    AudioManager aM;
     private GameObject actionIndicator;
     private GameObject player;
     private bool isExist;
@@ -15,6 +16,7 @@ public class InteractiveItem : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        aM = AudioManager.instance;
     }
 
     // Update is called once per frame
@@ -69,12 +71,14 @@ public class InteractiveItem : MonoBehaviour
                 this.transform.parent.parent = player.transform;
                 this.transform.parent.localPosition = Vector3.zero;
                 isGrabbed = true;
+                aM.pickUpSound.Play();
             }
             else
             {
                 player.GetComponent<PlayerBehaviour>().contains.transform.parent = player.transform.parent;
                 player.GetComponent<PlayerBehaviour>().contains = null;
                 isGrabbed = false;
+                aM.plantSound.Play();
             }
         }
     }

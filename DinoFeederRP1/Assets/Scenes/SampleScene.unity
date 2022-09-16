@@ -951,6 +951,7 @@ GameObject:
   - component: {fileID: 1766874452}
   - component: {fileID: 1766874451}
   - component: {fileID: 1766874453}
+  - component: {fileID: 1766874454}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1106,6 +1107,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveCount: 0
+--- !u!114 &1766874454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766874448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f23a040ec64c5649ab81b41174277ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepsSound: {fileID: 1001727359}
+  burpSound: {fileID: 1824918981}
+  pickUpSound: {fileID: 2003286841}
+  plantSound: {fileID: 1249572872}
+  waterSound: {fileID: 1840202780}
 --- !u!1 &1824918979
 GameObject:
   m_ObjectHideFlags: 0

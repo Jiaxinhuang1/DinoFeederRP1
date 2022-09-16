@@ -7,6 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
     Vector3 mousePos;
     GameManager gM;
     UIManager uM;
+    AudioManager aM;
     LineRenderer lineRenderer;
     Rigidbody2D rb;
     public float moveSpeed;
@@ -21,6 +22,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         gM = GameManager.instance;
         uM = UIManager.instance;
+        aM = AudioManager.instance;
         rb = GetComponent<Rigidbody2D>();
         lineRenderer = GetComponent<LineRenderer>();
     }
@@ -41,6 +43,14 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }else{
             avatarAnimator.Play("IdleRotation",1);
+        }
+        if ((rb.velocity.x != 0 || rb.velocity.y != 0) && !aM.footstepsSound.isPlaying)
+        {
+            aM.footstepsSound.Play();
+        }
+        else if (rb.velocity.x == 0 && rb.velocity.y == 0 && aM.footstepsSound.isPlaying)
+        {
+            aM.footstepsSound.Stop();
         }
     }
 
@@ -79,6 +89,7 @@ public class PlayerBehaviour : MonoBehaviour
                             uM.aliveCount++;
                         }
                         hit.transform.gameObject.GetComponent<TileBehaviour>().currentState = GameManager.State.live;
+                        aM.waterSound.Play();
                     }
                 } 
             }    
