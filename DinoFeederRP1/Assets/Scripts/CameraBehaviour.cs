@@ -7,10 +7,19 @@ public class CameraBehaviour : MonoBehaviour
     GameManager gM;
     public float xPosScaler;
 
+    public Transform target;
+    public Vector3 offset;
+
     void Start()
     {
         gM = GameManager.instance;
 
         transform.position = new Vector3(0 + gM.mapSizeX * xPosScaler, transform.position.y, transform.position.z);   
+    }
+
+    // keeps a distance
+    void Update()
+    {
+        transform.position = target.position + offset;
     }
 }

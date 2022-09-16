@@ -404,6 +404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xPosScaler: 4.5
+  target: {fileID: 621879360}
+  offset: {x: 0, y: -40, z: -40}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -455,12 +457,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: -35, z: -70}
+  m_LocalPosition: {x: 0, y: -50, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -40, y: 0, z: 0}
+--- !u!4 &621879360 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5011004999627177554, guid: 955041264e800814599679072acb3a01, type: 3}
+  m_PrefabInstance: {fileID: 5011004997942255356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1001727357
 GameObject:
   m_ObjectHideFlags: 0
