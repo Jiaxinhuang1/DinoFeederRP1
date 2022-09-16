@@ -10,8 +10,9 @@ public class InteractiveItem : MonoBehaviour
     private GameObject player;
     private bool isExist;
     private bool isInside;
-    private bool isGrabbed;
+    [SerializeField] private bool isGrabbed;
     public string actionText;
+    public string actionTwoText;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,21 @@ public class InteractiveItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.GetComponent<PlayerBehaviour>().contains == this.transform.gameObject.GetComponentInParent<ItemBehaviour>())
+        {
+            isGrabbed = true;
+        }
+        else
+        {
+            isGrabbed = false;
+        }
         if (Input.GetKeyDown(KeyCode.F) && (isInside || isGrabbed))
         {
             Grab();
+        }
+        if (Input.GetKeyDown(KeyCode.G) && (isInside && !isGrabbed))
+        {
+            Debug.Log("Grow");
         }
     }
 
@@ -35,8 +48,17 @@ public class InteractiveItem : MonoBehaviour
             isInside = true;
             if (!isExist)
             {
-                actionIndicator = Instantiate(Resources.Load("ActionIndicator")) as GameObject;
-                actionIndicator.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
+                if (this.transform.gameObject.GetComponentInParent<ItemBehaviour>().type == GameManager.ItemType.wateringCan)
+                {
+                    actionIndicator = Instantiate(Resources.Load("ActionIndicator")) as GameObject;
+                    actionIndicator.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
+                }
+                else if (this.transform.gameObject.GetComponentInParent<ItemBehaviour>().type == GameManager.ItemType.bone)
+                {
+                    actionIndicator = Instantiate(Resources.Load("TwoIndicator")) as GameObject;
+                    actionIndicator.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = actionText;
+                    actionIndicator.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = actionTwoText;
+                }
                 actionIndicator.transform.position = new Vector3(this.gameObject.transform.position.x + 10, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
                 LeanTween.moveZ(actionIndicator, this.gameObject.transform.position.z - 20, 0.2f);
                 LeanTween.scaleY(actionIndicator, 1, 0.2f);
@@ -62,22 +84,25 @@ public class InteractiveItem : MonoBehaviour
         {
             if (player.GetComponent<PlayerBehaviour>().contains != this.transform.gameObject.GetComponentInParent<ItemBehaviour>())
             {
-                if (player.GetComponent<PlayerBehaviour>().contains != null)
+                if (!isGrabbed)
                 {
-                    player.GetComponent<PlayerBehaviour>().contains.transform.parent = player.transform.parent;
-                    player.GetComponent<PlayerBehaviour>().contains.transform.position = this.transform.parent.position;
+                    if (player.GetComponent<PlayerBehaviour>().contains != null)
+                    {
+                        player.GetComponent<PlayerBehaviour>().contains.transform.parent = player.transform.parent;
+                        player.GetComponent<PlayerBehaviour>().contains.transform.position = this.transform.parent.position;
+                    }
+                    player.GetComponent<PlayerBehaviour>().contains = this.transform.gameObject.GetComponentInParent<ItemBehaviour>();
+                    this.transform.parent.parent = player.transform;
+                    this.transform.parent.localPosition = Vector3.zero;
+                    //isGrabbed = true;
+                    aM.pickUpSound.Play();
                 }
-                player.GetComponent<PlayerBehaviour>().contains = this.transform.gameObject.GetComponentInParent<ItemBehaviour>();
-                this.transform.parent.parent = player.transform;
-                this.transform.parent.localPosition = Vector3.zero;
-                isGrabbed = true;
-                aM.pickUpSound.Play();
             }
             else
             {
                 player.GetComponent<PlayerBehaviour>().contains.transform.parent = player.transform.parent;
                 player.GetComponent<PlayerBehaviour>().contains = null;
-                isGrabbed = false;
+                //isGrabbed = false;
                 aM.plantSound.Play();
             }
         }
