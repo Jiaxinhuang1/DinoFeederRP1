@@ -7,7 +7,6 @@ public class InteractiveItem : MonoBehaviour
 {
     AudioManager aM;
     private GameObject actionIndicator;
-    private GameObject player;
     private bool isExist;
     private bool isInside;
     [SerializeField] private bool isGrabbed;
@@ -16,14 +15,13 @@ public class InteractiveItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         aM = AudioManager.instance;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<PlayerBehaviour>().contains == this.transform.gameObject.GetComponentInParent<ItemBehaviour>())
+        if(player.GetComponent<PlayerBehaviour>().contains == this.transform.gameObject.GetComponentInParent<ItemBehaviour>())
         {
             isGrabbed = true;
         }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float tileSize;
     public GameObject tile;
     public GameObject currentFossil;
+    public GameObject player;
 
     void Awake(){
         if (instance != null && instance != this)
