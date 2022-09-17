@@ -17,6 +17,9 @@ public class PlayerBehaviour : MonoBehaviour
     public LayerMask interactMask;
     public event System.Action interactEvent;
     public ItemBehaviour contains;
+
+    public GameObject[] plants;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,6 +90,14 @@ public class PlayerBehaviour : MonoBehaviour
                         print("name: " + hit.collider.name + ", distance: " + ", " + transform.position + ", " + hit.transform.position + ", " + Vector3.Distance(transform.position, hit.transform.position) + ", reach: " + reach);
                         if(hit.transform.gameObject.GetComponent<TileBehaviour>().currentState == GameManager.State.dead){
                             uM.aliveCount++;
+                        }
+                        else
+                        {
+                            if (hit.transform.gameObject.GetComponent<TileBehaviour>().contains == null)
+                            {
+                                GameObject spawnedPlant = Instantiate(plants[Random.Range(0, plants.Length)], hit.transform.position, Quaternion.identity, hit.transform);
+                                hit.transform.gameObject.GetComponent<TileBehaviour>().contains = spawnedPlant;
+                            }
                         }
                         hit.transform.gameObject.GetComponent<TileBehaviour>().currentState = GameManager.State.live;
                         aM.waterSound.Play();
