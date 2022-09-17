@@ -60,8 +60,8 @@ public class InteractiveItem : MonoBehaviour
                     actionIndicator.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = actionText;
                     actionIndicator.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = actionTwoText;
                 }
-                actionIndicator.transform.position = new Vector3(this.gameObject.transform.position.x + 10, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
-                LeanTween.moveZ(actionIndicator, this.gameObject.transform.position.z - 20, 0.2f);
+                actionIndicator.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+                LeanTween.moveY(actionIndicator, this.gameObject.transform.position.y + 15, 0.2f);
                 LeanTween.scaleY(actionIndicator, 1, 0.2f);
                 isExist = true;
             }
@@ -73,7 +73,7 @@ public class InteractiveItem : MonoBehaviour
         if (collision.tag == "Player")
         {
             isInside = false;
-            LeanTween.moveZ(actionIndicator, this.gameObject.transform.position.z, 0.2f);
+            LeanTween.moveY(actionIndicator, this.gameObject.transform.position.y, 0.2f);
             LeanTween.scaleY(actionIndicator, 0, 0.2f).setDestroyOnComplete(true);
             isExist = false;
         }
