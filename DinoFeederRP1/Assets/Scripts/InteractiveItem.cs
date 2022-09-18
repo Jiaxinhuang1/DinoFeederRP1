@@ -7,6 +7,7 @@ public class InteractiveItem : MonoBehaviour
 {
     AudioManager aM;
     private GameObject actionIndicator;
+    private GameObject player;
     private bool isExist;
     private bool isInside;
     [SerializeField] private bool isGrabbed;
@@ -16,6 +17,7 @@ public class InteractiveItem : MonoBehaviour
     void Start()
     {
         aM = AudioManager.instance;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
