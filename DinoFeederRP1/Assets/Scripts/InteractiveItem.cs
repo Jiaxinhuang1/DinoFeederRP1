@@ -8,6 +8,7 @@ public class InteractiveItem : MonoBehaviour
     AudioManager aM;
     GameManager gM;
     private GameObject actionIndicator;
+    private GameObject player;
     private bool isExist;
     private bool isInside;
     [SerializeField] private bool isGrabbed;
