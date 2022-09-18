@@ -461,6 +461,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &970415665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5011004999627177552, guid: 955041264e800814599679072acb3a01, type: 3}
+  m_PrefabInstance: {fileID: 5011004997942255356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1001727357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,6 +1027,7 @@ MonoBehaviour:
   tileSize: 10
   tile: {fileID: 2226855414948700073, guid: aaada38ec4a71a2469e72e2b92ec93e6, type: 3}
   currentFossil: {fileID: 0}
+  player: {fileID: 970415665}
 --- !u!4 &1766874450
 Transform:
   m_ObjectHideFlags: 0
@@ -1225,6 +1231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dinosaur
       objectReference: {fileID: 0}
+    - target: {fileID: 1098340956109770544, guid: 42d76807d3155c54ba8f6be4ef9ee027, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 023ced085128e7a4e8227fc2e6199ffd, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42d76807d3155c54ba8f6be4ef9ee027, type: 3}
 --- !u!1 &1824918979

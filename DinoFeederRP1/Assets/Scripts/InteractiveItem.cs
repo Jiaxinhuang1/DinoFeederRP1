@@ -6,6 +6,7 @@ using TMPro;
 public class InteractiveItem : MonoBehaviour
 {
     AudioManager aM;
+    GameManager gM;
     private GameObject actionIndicator;
     private bool isExist;
     private bool isInside;
@@ -16,12 +17,13 @@ public class InteractiveItem : MonoBehaviour
     void Start()
     {
         aM = AudioManager.instance;
+        gM = GameManager.instance;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player.GetComponent<PlayerBehaviour>().contains == this.transform.gameObject.GetComponentInParent<ItemBehaviour>())
+        if(gM.player.GetComponent<PlayerBehaviour>().contains == this.transform.gameObject.GetComponentInParent<ItemBehaviour>())
         {
             isGrabbed = true;
         }
@@ -81,17 +83,17 @@ public class InteractiveItem : MonoBehaviour
     {
         if (this.transform.GetComponentInParent<ItemBehaviour>() != null)
         {
-            if (player.GetComponent<PlayerBehaviour>().contains != this.transform.gameObject.GetComponentInParent<ItemBehaviour>())
+            if (gM.player.GetComponent<PlayerBehaviour>().contains != this.transform.gameObject.GetComponentInParent<ItemBehaviour>())
             {
                 if (!isGrabbed)
                 {
-                    if (player.GetComponent<PlayerBehaviour>().contains != null)
+                    if (gM.player.GetComponent<PlayerBehaviour>().contains != null)
                     {
-                        player.GetComponent<PlayerBehaviour>().contains.transform.parent = player.transform.parent;
-                        player.GetComponent<PlayerBehaviour>().contains.transform.position = this.transform.parent.position;
+                        gM.player.GetComponent<PlayerBehaviour>().contains.transform.parent = gM.player.transform.parent;
+                        gM.player.GetComponent<PlayerBehaviour>().contains.transform.position = this.transform.parent.position;
                     }
-                    player.GetComponent<PlayerBehaviour>().contains = this.transform.gameObject.GetComponentInParent<ItemBehaviour>();
-                    this.transform.parent.parent = player.transform;
+                    gM.player.GetComponent<PlayerBehaviour>().contains = this.transform.gameObject.GetComponentInParent<ItemBehaviour>();
+                    this.transform.parent.parent = gM.player.transform;
                     this.transform.parent.localPosition = Vector3.zero;
                     //isGrabbed = true;
                     aM.pickUpSound.Play();
@@ -99,8 +101,8 @@ public class InteractiveItem : MonoBehaviour
             }
             else
             {
-                player.GetComponent<PlayerBehaviour>().contains.transform.parent = player.transform.parent;
-                player.GetComponent<PlayerBehaviour>().contains = null;
+                gM.player.GetComponent<PlayerBehaviour>().contains.transform.parent = gM.player.transform.parent;
+                gM.player.GetComponent<PlayerBehaviour>().contains = null;
                 //isGrabbed = false;
                 aM.plantSound.Play();
             }
