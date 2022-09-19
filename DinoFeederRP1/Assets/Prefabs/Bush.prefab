@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 171041561506141194}
   - component: {fileID: 2950014207665458371}
   - component: {fileID: 4945839555133954999}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769a2c30abede8841ae989531620ed4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodType: 0

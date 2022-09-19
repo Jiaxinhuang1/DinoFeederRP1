@@ -13,25 +13,30 @@ public class TileBehaviour : MonoBehaviour
     public List<Material> live;
     public float objectSpawnRate;
     public GameObject spawnedObject;
+    public int health;
 
     IEnumerator TileUpdate()
     {
         while (true){
             yield return new WaitForSeconds(1f);
             if(Random.Range(0, 100) < objectSpawnRate && gM.currentFossil == null){
-                GameObject newObjectSpawnedWithin = Instantiate(spawnedObject, transform.position, Quaternion.identity, transform);
+                GameObject newObjectSpawnedWithin = Instantiate(spawnedObject, transform.position, Quaternion.identity);
                 contains = newObjectSpawnedWithin;
                 gM.currentFossil = newObjectSpawnedWithin;
             }
-            /*
+            if(health <= 0){
+                currentState = GameManager.State.dead;
+            }
             switch(currentState){
                 case GameManager.State.dead:
+                if(contains != null && contains.TryGetComponent(out PlantBehaviour plantBehaviour)){
+                    plantBehaviour.BeginDestroySelf();
+                }
                 break;
                 case GameManager.State.live:
-                uM.aliveCount++;
+                    health--;
                 break;
             }
-            */
         }
     }
 
@@ -51,12 +56,12 @@ public class TileBehaviour : MonoBehaviour
     }
 
     void Refresh(){
-        switch (currentState){
+        switch(currentState){
             case GameManager.State.dead:
                 meshRenderer.material = dead[0/*Random.Range(0, dead.Count)*/];
                 break;
             case GameManager.State.live:
-                meshRenderer.material = live[Random.Range(0, live.Count)];
+                meshRenderer.material = live[0/*Random.Range(0, dead.Count)*/];
                 break;
         }
     }

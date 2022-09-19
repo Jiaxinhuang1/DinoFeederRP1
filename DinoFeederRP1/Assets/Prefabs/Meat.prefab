@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 392873687622347436}
   - component: {fileID: 7971107530714300779}
   - component: {fileID: 2419722122888082569}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Meat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769a2c30abede8841ae989531620ed4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodType: 1
