@@ -100,7 +100,7 @@ MonoBehaviour:
   type: 3
   isGrabbed: 0
   actionText:
-  - press F to move
+  - Press F to Move
   - Place items inside
 --- !u!61 &1446662881191007461
 BoxCollider2D:

@@ -99,7 +99,7 @@ MonoBehaviour:
   type: 2
   isGrabbed: 0
   actionText:
-  - press F to grab
+  - Press F to Grab
 --- !u!61 &5331319683049784681
 BoxCollider2D:
   m_ObjectHideFlags: 0

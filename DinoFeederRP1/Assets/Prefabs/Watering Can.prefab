@@ -99,7 +99,7 @@ MonoBehaviour:
   type: 0
   isGrabbed: 0
   actionText:
-  - press F to grab
+  - Press F to Grab
   - Click to Water
 --- !u!61 &5312854526083440401
 BoxCollider2D:
