@@ -113,7 +113,7 @@ public class PlayerBehaviour : MonoBehaviour
                     
                                 if (hit.transform.gameObject.GetComponent<TileBehaviour>().contains == null)
                                 {
-                                    GameObject spawnedPlant = Instantiate(plants[Random.Range(0, plants.Length)], hit.transform.position, Quaternion.identity, hit.transform);
+                                    spawnedPlant = Instantiate(plants[Random.Range(0, plants.Length)], hit.transform.position, Quaternion.identity, hit.transform);
                                     hit.transform.gameObject.GetComponent<TileBehaviour>().contains = spawnedPlant;
                                 }
                             }

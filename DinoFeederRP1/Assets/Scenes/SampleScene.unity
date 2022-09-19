@@ -1102,7 +1102,7 @@ MonoBehaviour:
   mapSizeX: 10
   mapSizeY: 10
   tileSize: 10
-  tile: {fileID: 2226855414948700073, guid: aaada38ec4a71a2469e72e2b92ec93e6, type: 3}
+  tile: {fileID: 6328563655933238672, guid: 286f8f5a5653e3847b7e79875c653fef, type: 3}
   currentFossil: {fileID: 0}
   player: {fileID: 970415665}
   house: {fileID: 7287856596574882621, guid: 4617a1aa05f88de41bb4508671dfc54a, type: 3}
@@ -1946,7 +1946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5011004999627177555, guid: 955041264e800814599679072acb3a01, type: 3}
       propertyPath: wateringCanPower
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 955041264e800814599679072acb3a01, type: 3}
