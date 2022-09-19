@@ -166,9 +166,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -734554171
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bb634edb5104be34bbe29c2ce4e8222d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -255,6 +255,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   contains: {fileID: 0}
+  grabTarget: {fileID: 0}
+  wateringCanPower: 0
   plants:
   - {fileID: 7980115932834516264, guid: d81c50f39610ac04c8aae8a20d614c7e, type: 3}
   - {fileID: 5108490567754259216, guid: 4a4f41422ae8553428e2a6b23a863e82, type: 3}

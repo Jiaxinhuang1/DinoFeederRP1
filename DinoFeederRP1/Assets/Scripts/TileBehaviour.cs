@@ -6,7 +6,7 @@ public class TileBehaviour : MonoBehaviour
 {
     UIManager uM;
     GameManager gM;
-    MeshRenderer meshRenderer;
+    public MeshRenderer meshRenderer;
     public GameObject contains;
     public GameManager.State currentState;
     public List<Material> dead;
@@ -35,6 +35,7 @@ public class TileBehaviour : MonoBehaviour
                 break;
                 case GameManager.State.live:
                     health--;
+                    meshRenderer.material.color = Color.magenta;
                 break;
             }
         }
@@ -45,7 +46,7 @@ public class TileBehaviour : MonoBehaviour
     {
         gM = GameManager.instance;
         uM = UIManager.instance;
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        //meshRenderer = gameObject.GetComponent<MeshRenderer>();
         StartCoroutine(TileUpdate());
     }
 

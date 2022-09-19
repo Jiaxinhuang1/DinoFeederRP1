@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    Vector3 mousePos;
+    public Vector3 mousePos;
     GameManager gM;
     UIManager uM;
     AudioManager aM;
@@ -64,29 +64,40 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     void Interact(){
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, 200, interactMask)){
+        //RaycastHit2D hit;
+        //Ray2D ray = Camera.main.ScreenPointToRay2D(Input.mousePosition);
+        Collider2D hit  = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        if(hit != null){
+            print("hitting " + hit.gameObject);
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             lineRenderer.SetPosition(0, new Vector3(transform.position.x, transform.position.y, transform.position.z+1));
             lineRenderer.SetPosition(1, hit.transform.position);
             lineRenderer.endColor = Color.red;
             //grab item underneath player
-                if(Input.GetButtonDown("Grab")){
-                    if(contains != null){
-                        contains.transform.parent = this.transform.parent;
-                        contains.transform.position = this.transform.position;
-                        contains = null;
-                    }
-                    if(grabTarget != null){
-                        contains = grabTarget;
-                        grabTarget.transform.parent = this.transform;
-                        grabTarget.transform.localPosition = Vector3.zero;
-                    }
+            if(Input.GetButtonDown("Grab")){
+                if(contains != null){
+                    contains.transform.parent = this.transform.parent;
+                    contains.transform.position = this.transform.position;
+                    contains = null;
                 }
+                if(grabTarget != null){
+                    contains = grabTarget;
+                    grabTarget.transform.parent = this.transform;
+                    grabTarget.transform.localPosition = new Vector3(0, 0, -6);
+                }
+            }
             //interact at cursor position
             if(Input.GetButtonDown("Interact") && Vector3.Distance(transform.position, hit.transform.position) < reach){
-                if(hit.transform.TryGetComponent(out TileBehaviour tileBehaviour) && contains != null && contains.type == GameManager.ItemType.wateringCan){    
-                    print("name: " + hit.collider.name + ", distance: " + ", " + transform.position + ", " + hit.transform.position + ", " + Vector3.Distance(transform.position, hit.transform.position) + ", reach: " + reach);
+                if(hit.transform.TryGetComponent(out GeneratorBehaviour generatorBehaviour) && contains != null && generatorBehaviour.contains == null){
+                    generatorBehaviour.contains = contains;
+                    StartCoroutine(generatorBehaviour.Consume());
+                    contains.transform.parent = this.transform.parent;
+                    contains.transform.position = this.transform.position;
+                    contains = null;
+
+                }
+                else if(hit.transform.TryGetComponent(out TileBehaviour tileBehaviour) && contains != null && contains.type == GameManager.ItemType.wateringCan){    
+                    print("name: " + hit.name + ", distance: " + ", " + transform.position + ", " + hit.transform.position + ", " + Vector3.Distance(transform.position, hit.transform.position) + ", reach: " + reach);
                     if(tileBehaviour.currentState == GameManager.State.dead){
                         uM.aliveCount++;
                         tileBehaviour.health = Random.Range(wateringCanPower, wateringCanPower + 5);
@@ -107,7 +118,7 @@ public class PlayerBehaviour : MonoBehaviour
 
             if(Vector3.Distance(transform.position, hit.transform.position) < reach){
                 lineRenderer.endColor = Color.green;
-            }    
+            } 
         }
     }
 
