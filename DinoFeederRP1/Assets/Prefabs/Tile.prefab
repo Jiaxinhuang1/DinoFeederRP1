@@ -164,3 +164,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+=======
+--- !u!64 &2226855414948700074
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226855414948700073}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &829577347737014071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226855414948700073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b47186a76f0e884e995919fdd5388b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contains: {fileID: 0}
+  currentState: 1
+  dead:
+  - {fileID: 2100000, guid: 66b28d464a46f7348820f42b8d0ec8a6, type: 2}
+  - {fileID: 2100000, guid: 882b633d7093df947a055e3468d11481, type: 2}
+  - {fileID: 2100000, guid: 9fafd09e958b6c7458c566c582dccef3, type: 2}
+  live:
+  - {fileID: 2100000, guid: 0f4544a03aa36fb45ab5e6adb8945bd7, type: 2}
+  objectSpawnRate: 0.1
+  spawnedObject: {fileID: 1060882296012167129, guid: 0503b4083e52e7b49965d9fa0b6bb492, type: 3}
+  house: {fileID: 7287856596574882621, guid: 4617a1aa05f88de41bb4508671dfc54a, type: 3}
+  well: {fileID: 962292983771356536, guid: 6283ea3009bf2e044938289499c40297, type: 3}

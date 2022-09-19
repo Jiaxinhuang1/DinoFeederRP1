@@ -1105,6 +1105,8 @@ MonoBehaviour:
   tile: {fileID: 2226855414948700073, guid: aaada38ec4a71a2469e72e2b92ec93e6, type: 3}
   currentFossil: {fileID: 0}
   player: {fileID: 970415665}
+  house: {fileID: 7287856596574882621, guid: 4617a1aa05f88de41bb4508671dfc54a, type: 3}
+  well: {fileID: 962292983771356536, guid: 6283ea3009bf2e044938289499c40297, type: 3}
 --- !u!4 &1766874450
 Transform:
   m_ObjectHideFlags: 0

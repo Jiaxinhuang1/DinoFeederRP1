@@ -108,6 +108,15 @@ public class PlayerBehaviour : MonoBehaviour
                         {
                             GameObject spawnedPlant = Instantiate(plants[Random.Range(0, plants.Length)], hit.transform.position, Quaternion.identity, hit.transform);
                             tileBehaviour.contains = spawnedPlant;
+                            if (hit.transform.gameObject.GetComponent<TileBehaviour>().contains != gM.house)
+                            {
+                    
+                                if (hit.transform.gameObject.GetComponent<TileBehaviour>().contains == null)
+                                {
+                                    GameObject spawnedPlant = Instantiate(plants[Random.Range(0, plants.Length)], hit.transform.position, Quaternion.identity, hit.transform);
+                                    hit.transform.gameObject.GetComponent<TileBehaviour>().contains = spawnedPlant;
+                                }
+                            }
                         }
                     }
                     tileBehaviour.currentState = GameManager.State.live;
