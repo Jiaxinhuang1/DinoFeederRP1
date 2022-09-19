@@ -6,32 +6,38 @@ public class TileBehaviour : MonoBehaviour
 {
     UIManager uM;
     GameManager gM;
-    MeshRenderer meshRenderer;
+    public MeshRenderer meshRenderer;
     public GameObject contains;
     public GameManager.State currentState;
     public List<Material> dead;
     public List<Material> live;
     public float objectSpawnRate;
     public GameObject spawnedObject;
+    public int health;
 
     IEnumerator TileUpdate()
     {
         while(true){
             yield return new WaitForSeconds(1f);
             if(Random.Range(0, 100) < objectSpawnRate && gM.currentFossil == null){
-                GameObject newObjectSpawnedWithin = Instantiate(spawnedObject, transform.position, Quaternion.identity, transform);
+                GameObject newObjectSpawnedWithin = Instantiate(spawnedObject, transform.position, Quaternion.identity);
                 contains = newObjectSpawnedWithin;
                 gM.currentFossil = newObjectSpawnedWithin;
             }
-            /*
+            if(health <= 0){
+                currentState = GameManager.State.dead;
+            }
             switch(currentState){
                 case GameManager.State.dead:
+                if(contains != null && contains.TryGetComponent(out PlantBehaviour plantBehaviour)){
+                    plantBehaviour.BeginDestroySelf();
+                }
                 break;
                 case GameManager.State.live:
-                uM.aliveCount++;
+                    health--;
+                    meshRenderer.material.color = Color.magenta;
                 break;
             }
-            */
         }
     }
 
@@ -40,7 +46,7 @@ public class TileBehaviour : MonoBehaviour
     {
         gM = GameManager.instance;
         uM = UIManager.instance;
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        //meshRenderer = gameObject.GetComponent<MeshRenderer>();
         StartCoroutine(TileUpdate());
     }
 
@@ -51,12 +57,12 @@ public class TileBehaviour : MonoBehaviour
     }
 
     void Refresh(){
-        switch (currentState){
+        switch(currentState){
             case GameManager.State.dead:
                 meshRenderer.material = dead[0/*Random.Range(0, dead.Count)*/];
                 break;
             case GameManager.State.live:
-                meshRenderer.material = live[Random.Range(0, live.Count)];
+                meshRenderer.material = live[0/*Random.Range(0, dead.Count)*/];
                 break;
         }
     }

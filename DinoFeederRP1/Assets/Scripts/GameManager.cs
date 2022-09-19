@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     CompositeCollider2D boundingBox;
 
     public enum State{ live, dead }
-    public enum ItemType{ wateringCan, seed, bone }
+    public enum ItemType{ wateringCan, seed, bone, cloner }
+    public enum FoodType{ none, meat, veggie, special }
     public static GameManager instance;
     public List<GameObject> tiles;
     public int mapSizeX, mapSizeY;

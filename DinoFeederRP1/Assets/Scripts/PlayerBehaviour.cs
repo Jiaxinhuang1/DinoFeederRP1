@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    Vector3 mousePos;
+    public Vector3 mousePos;
     GameManager gM;
     UIManager uM;
     AudioManager aM;
@@ -17,6 +17,11 @@ public class PlayerBehaviour : MonoBehaviour
     public LayerMask interactMask;
     public event System.Action interactEvent;
     public ItemBehaviour contains;
+    public ItemBehaviour grabTarget;
+    public int wateringCanPower;
+
+    public GameObject[] plants;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,41 +64,70 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     void Interact(){
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, 200, interactMask)){
+        //RaycastHit2D hit;
+        //Ray2D ray = Camera.main.ScreenPointToRay2D(Input.mousePosition);
+        Collider2D hit  = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        if(hit != null){
+            print("hitting " + hit.gameObject);
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             lineRenderer.SetPosition(0, new Vector3(transform.position.x, transform.position.y, transform.position.z+1));
             lineRenderer.SetPosition(1, hit.transform.position);
             lineRenderer.endColor = Color.red;
+            //grab item underneath player
+            if(Input.GetButtonDown("Grab")){
+                if(contains != null){
+                    contains.transform.parent = this.transform.parent;
+                    contains.transform.position = this.transform.position;
+                    contains = null;
+                }
+                if(grabTarget != null){
+                    contains = grabTarget;
+                    grabTarget.transform.parent = this.transform;
+                    grabTarget.transform.localPosition = new Vector3(0, 0, -6);
+                }
+            }
+            //interact at cursor position
+            if(Input.GetButtonDown("Interact") && Vector3.Distance(transform.position, hit.transform.position) < reach){
+                if(hit.transform.TryGetComponent(out GeneratorBehaviour generatorBehaviour) && contains != null && generatorBehaviour.contains == null){
+                    generatorBehaviour.contains = contains;
+                    StartCoroutine(generatorBehaviour.Consume());
+                    contains.transform.parent = this.transform.parent;
+                    contains.transform.position = this.transform.position;
+                    contains = null;
+
+                }
+                else if(hit.transform.TryGetComponent(out TileBehaviour tileBehaviour) && contains != null && contains.type == GameManager.ItemType.wateringCan){    
+                    print("name: " + hit.name + ", distance: " + ", " + transform.position + ", " + hit.transform.position + ", " + Vector3.Distance(transform.position, hit.transform.position) + ", reach: " + reach);
+                    if(tileBehaviour.currentState == GameManager.State.dead){
+                        uM.aliveCount++;
+                        tileBehaviour.health = Random.Range(wateringCanPower, wateringCanPower + 5);
+                    }
+                    else
+                    {
+                        if (tileBehaviour.contains == null)
+                        {
+                            GameObject spawnedPlant = Instantiate(plants[Random.Range(0, plants.Length)], hit.transform.position, Quaternion.identity, hit.transform);
+                            tileBehaviour.contains = spawnedPlant;
+                            if (hit.transform.gameObject.GetComponent<TileBehaviour>().contains != gM.house)
+                            {
+                    
+                                if (hit.transform.gameObject.GetComponent<TileBehaviour>().contains == null)
+                                {
+                                    spawnedPlant = Instantiate(plants[Random.Range(0, plants.Length)], hit.transform.position, Quaternion.identity, hit.transform);
+                                    hit.transform.gameObject.GetComponent<TileBehaviour>().contains = spawnedPlant;
+                                }
+                            }
+                        }
+                    }
+                    tileBehaviour.currentState = GameManager.State.live;
+                    aM.waterSound.Play();
+                    Instantiate(Resources.Load("Water"), hit.transform);
+                }
+            }
+
             if(Vector3.Distance(transform.position, hit.transform.position) < reach){
                 lineRenderer.endColor = Color.green;
-                /*
-                if(Input.GetButton("Grab")){
-                    if(hit.transform.GetComponent<ItemBehaviour>() != null){
-                        if(contains != hit.transform.gameObject.GetComponent<ItemBehaviour>()){
-                            if(contains != null){
-                                contains.transform.parent = this.transform.parent;
-                                contains.transform.position = hit.transform.position;
-                            }
-                            contains = hit.transform.gameObject.GetComponent<ItemBehaviour>();
-                            hit.transform.parent = this.transform;
-                            hit.transform.localPosition = Vector3.zero;
-                        }
-                    }
-                }
-                */
-                if(Input.GetButtonDown("Interact")){
-                    if(hit.transform.GetComponent<TileBehaviour>() != null && contains != null && contains.type == GameManager.ItemType.wateringCan){    
-                        print("name: " + hit.collider.name + ", distance: " + ", " + transform.position + ", " + hit.transform.position + ", " + Vector3.Distance(transform.position, hit.transform.position) + ", reach: " + reach);
-                        if(hit.transform.gameObject.GetComponent<TileBehaviour>().currentState == GameManager.State.dead){
-                            uM.aliveCount++;
-                        }
-                        hit.transform.gameObject.GetComponent<TileBehaviour>().currentState = GameManager.State.live;
-                        aM.waterSound.Play();
-                        Instantiate(Resources.Load("Water"), hit.transform);
-                    }
-                } 
-            }    
+            } 
         }
     }
 
