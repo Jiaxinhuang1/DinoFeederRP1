@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject tile;
     public GameObject currentFossil;
     public GameObject player;
+    public GameObject house;
+    public GameObject well;
 
     void Awake(){
         if (instance != null && instance != this)
@@ -49,5 +51,16 @@ public class GameManager : MonoBehaviour
                 tiles.Add(newTile);
             }
         }
+        GameObject newHouse = Instantiate(house, tiles[19].transform.position, Quaternion.identity, transform);
+        GameObject newWell = Instantiate(well, tiles[8].transform.position, Quaternion.identity, transform);
+        tiles[19].GetComponent<TileBehaviour>().contains = newHouse;
+        tiles[18].GetComponent<TileBehaviour>().contains = newHouse;
+        tiles[17].GetComponent<TileBehaviour>().contains = newHouse;
+        tiles[9].GetComponent<TileBehaviour>().contains = newHouse;
+        tiles[8].GetComponent<TileBehaviour>().contains = newHouse;
+        tiles[7].GetComponent<TileBehaviour>().contains = newHouse;
+        tiles[29].GetComponent<TileBehaviour>().contains = newHouse;
+        tiles[28].GetComponent<TileBehaviour>().contains = newHouse;
+        tiles[27].GetComponent<TileBehaviour>().contains = newHouse;
     }
 }

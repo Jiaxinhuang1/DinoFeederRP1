@@ -93,10 +93,13 @@ public class PlayerBehaviour : MonoBehaviour
                         }
                         else
                         {
-                            if (hit.transform.gameObject.GetComponent<TileBehaviour>().contains == null)
+                            if (hit.transform.gameObject.GetComponent<TileBehaviour>().contains != gM.house)
                             {
-                                GameObject spawnedPlant = Instantiate(plants[Random.Range(0, plants.Length)], hit.transform.position, Quaternion.identity, hit.transform);
-                                hit.transform.gameObject.GetComponent<TileBehaviour>().contains = spawnedPlant;
+                                if (hit.transform.gameObject.GetComponent<TileBehaviour>().contains == null)
+                                {
+                                    GameObject spawnedPlant = Instantiate(plants[Random.Range(0, plants.Length)], hit.transform.position, Quaternion.identity, hit.transform);
+                                    hit.transform.gameObject.GetComponent<TileBehaviour>().contains = spawnedPlant;
+                                }
                             }
                         }
                         hit.transform.gameObject.GetComponent<TileBehaviour>().currentState = GameManager.State.live;

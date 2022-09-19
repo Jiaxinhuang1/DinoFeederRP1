@@ -119,3 +119,5 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 0f4544a03aa36fb45ab5e6adb8945bd7, type: 2}
   objectSpawnRate: 0.1
   spawnedObject: {fileID: 1060882296012167129, guid: 0503b4083e52e7b49965d9fa0b6bb492, type: 3}
+  house: {fileID: 7287856596574882621, guid: 4617a1aa05f88de41bb4508671dfc54a, type: 3}
+  well: {fileID: 962292983771356536, guid: 6283ea3009bf2e044938289499c40297, type: 3}
