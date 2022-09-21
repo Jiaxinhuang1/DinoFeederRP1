@@ -14,7 +14,14 @@ public class GameManager : MonoBehaviour
     public int mapSizeX, mapSizeY;
     public float tileSize;
     public GameObject tile;
-    public GameObject fence;
+    public GameObject fenceBack;
+    public GameObject fenceFront;
+    public GameObject fenceLeft;
+    public GameObject fenceRight;
+    public GameObject topLeft;
+    public GameObject topRight;
+    public GameObject bottomLeft;
+    public GameObject bottomRight;
     public GameObject currentFossil;
     public GameObject player;
     public GameObject house;
@@ -47,20 +54,46 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < mapSizeY; j++)
             {
-                if (i == 0 || i == mapSizeX - 1 || j == 0 || j == mapSizeY - 1)
+                GameObject newFence;
+                if (i == 0 && j == 0)
                 {
-                    GameObject newFence = Instantiate(fence, transform);
-                    newFence.name = "Fence:" + i + ", " + j;
-                    newFence.transform.position = new Vector2(i * tileSize + tileSize / 2, j * tileSize + tileSize / 2);
-                    tiles.Add(newFence);
+                    newFence = Instantiate(bottomLeft, transform);
+                }
+                else if (i == 0 && j == mapSizeX - 1)
+                {
+                    newFence = Instantiate(topLeft, transform);
+                }
+                else if (i == mapSizeX - 1 && j == 0)
+                {
+                    newFence = Instantiate(bottomRight, transform);
+                }
+                else if (i == mapSizeX - 1 && j == mapSizeX - 1)
+                {
+                    newFence = Instantiate(topRight, transform);
+                }
+                else if (i == 0)
+                {
+                    newFence = Instantiate(fenceLeft, transform);
+                }
+                else if (i == mapSizeX - 1)
+                {
+                    newFence = Instantiate(fenceRight, transform);
+                }
+                else if (j == 0)
+                {
+                    newFence = Instantiate(fenceFront, transform);
+                }
+                else if (j == mapSizeX - 1)
+                {
+                    newFence = Instantiate(fenceBack, transform);
                 }
                 else
                 {
-                    GameObject newTile = Instantiate(tile, transform);
-                    newTile.name = i + ", " + j;
-                    newTile.transform.position = new Vector2(i * tileSize + tileSize / 2, j * tileSize + tileSize / 2);
-                    tiles.Add(newTile);
+                    newFence = Instantiate(tile, transform);
                 }
+                newFence.name = i + ", " + j;
+                newFence.transform.position = new Vector2(i * tileSize + tileSize / 2, j * tileSize + tileSize / 2);
+                tiles.Add(newFence);
             }
         }
 
