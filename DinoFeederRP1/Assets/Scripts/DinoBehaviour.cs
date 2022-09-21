@@ -35,8 +35,8 @@ public class DinoBehaviour : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         aM = AudioManager.instance;
-        mapBounds = new Bounds(new Vector3(0, 0), new Vector3(GameManager.instance.mapSizeX * GameManager.instance.tileSize, GameManager.instance.mapSizeY * GameManager.instance.tileSize));
-        mapBounds.center += mapBounds.max/2;
+        mapBounds = mapBounds = new Bounds(new Vector3(0, 0), new Vector3((GameManager.instance.mapSizeX * GameManager.instance.tileSize) - 20, (GameManager.instance.mapSizeY * GameManager.instance.tileSize) - 20));
+        mapBounds.center = new Vector3(55, 55, 0);
         moveTarget = transform.position;
         StartCoroutine(TakeMove());
     }

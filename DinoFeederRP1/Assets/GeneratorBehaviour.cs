@@ -40,6 +40,7 @@ public class GeneratorBehaviour : MonoBehaviour
 
     void ConsumeContainedObject(GameObject candidate){
         GameObject newDino = Instantiate(dinoPrefabs[Random.Range(0, dinoPrefabs.Length)]);
+        AudioManager.instance.dinoSpawnSound.Play();
         newDino.transform.position = transform.position;
         contains = null;
         Destroy(contains);

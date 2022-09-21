@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e793cf5313ad0614289c32db38e354fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPosScaler: 2.95
+  xPosScaler: 0
 --- !u!1 &5011004998306985263
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95d1295190c718843aa5a9215775a3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePos: {x: 0, y: 0, z: 0}
   moveSpeed: 25
   reach: 20
   avatarSR: {fileID: 5011004998306985258}

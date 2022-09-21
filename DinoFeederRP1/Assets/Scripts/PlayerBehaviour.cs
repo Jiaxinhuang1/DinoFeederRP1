@@ -89,12 +89,14 @@ public class PlayerBehaviour : MonoBehaviour
             //interact at cursor position
             if(Input.GetButtonDown("Interact") && Vector3.Distance(transform.position, hit.transform.position) < reach){
                 if(hit.transform.TryGetComponent(out GeneratorBehaviour generatorBehaviour) && contains != null && generatorBehaviour.contains == null){
-                    generatorBehaviour.contains = contains;
-                    StartCoroutine(generatorBehaviour.Consume());
-                    contains.transform.parent = this.transform.parent;
-                    contains.transform.position = this.transform.position;
-                    contains = null;
-
+                    if (contains.type != GameManager.ItemType.cloner)
+                    {
+                        generatorBehaviour.contains = contains;
+                        StartCoroutine(generatorBehaviour.Consume());
+                        contains.transform.parent = this.transform.parent;
+                        contains.transform.position = this.transform.position;
+                        contains = null;
+                    }
                 }
                 else if(hit.transform.TryGetComponent(out TileBehaviour tileBehaviour) && contains != null && contains.type == GameManager.ItemType.wateringCan){    
                     print("name: " + hit.name + ", distance: " + ", " + transform.position + ", " + hit.transform.position + ", " + Vector3.Distance(transform.position, hit.transform.position) + ", reach: " + reach);

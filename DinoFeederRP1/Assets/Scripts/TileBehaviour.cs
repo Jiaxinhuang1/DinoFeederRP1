@@ -19,11 +19,12 @@ public class TileBehaviour : MonoBehaviour
     {
         while (true){
             yield return new WaitForSeconds(1f);
-            if(Random.Range(0, 100) < objectSpawnRate && gM.currentFossil == null){
+            /*if(Random.Range(0, 100) < objectSpawnRate && gM.currentFossil == null){
                 GameObject newObjectSpawnedWithin = Instantiate(spawnedObject, transform.position, Quaternion.identity);
                 contains = newObjectSpawnedWithin;
                 gM.currentFossil = newObjectSpawnedWithin;
-            }
+            }*/
+
             if(health <= 0){
                 currentState = GameManager.State.dead;
             }

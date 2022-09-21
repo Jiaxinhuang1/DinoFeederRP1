@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource pickUpSound;
     public AudioSource plantSound;
     public AudioSource waterSound;
+    public AudioSource dinoSpawnSound;
+
     void Awake()
     {
         if (instance != null && instance != this)
